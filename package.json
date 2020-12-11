@@ -1,0 +1,32 @@
+{
+  "name": "pro-offer",
+  "version": "1.0.0",
+  "description": "Pro-Offer Demo",
+  "main": "server.js",
+  "scripts": {
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "node server.js",
+    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
+    "client": "cd client && npm run start",
+    "install": "cd client && npm install",
+    "build": "cd client && npm run build",
+    "heroku-postbuild": "npm run build"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^4.1.2",
+    "nodemon": "^1.19.4"
+  },
+  "dependencies": {
+    "axios": "^0.21.0",
+    "cloudinary": "^1.23.0",
+    "express": "^4.17.1",
+    "form-data": "^3.0.0",
+    "if-env": "^1.0.4",
+    "mongoose": "^5.11.4",
+    "multer": "^1.4.2",
+    "path": "^0.12.7",
+    "uuid": "^3.3.2"
+  }
+}
