@@ -4,11 +4,16 @@ const apiRoutes = require("./api");
 
 console.log('API entered');
 
+router.get("/", (req, res) => {
+  res.send({ response: "I am alive" }).status(200);
+});
+
 // API Routes
 router.use("/api", apiRoutes);
 
+
 // If no API routes are hit, send the React app
-router.use(function(req, res) {
+router.use(function (req, res) {
   res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
 
