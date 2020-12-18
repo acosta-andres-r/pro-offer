@@ -1,7 +1,7 @@
 import React from "react";
 
 import API from "../utils/API";
-import Product from "../components/Form/Product"
+import Product from "../components/Forms/Product"
 import UploadBtn from "../components/Buttons/Upload/Upload"
 import TextField from "../components/Input/TextField/TextField"
 
