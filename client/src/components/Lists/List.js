@@ -27,13 +27,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function SelectedListItem() {
+export default function SelectedListItem(props) {
   const classes = useStyles();
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
-
-  const handleListItemClick = (event, index) => {
-    setSelectedIndex(index);
-  };
 
   return (
     <div className={classes.root}>
@@ -45,30 +40,23 @@ export default function SelectedListItem() {
           <ListItemText primary="Search History:" />
         </ListItem>
         <Divider />
-        <ListItem
-          button
-          selected={selectedIndex === 0}
-          onClick={(event) => handleListItemClick(event, 0)}
-        >
-          <ListItemText primary="Cam" />
-          <ListItemSecondaryAction onClick={() => console.log("test")}>
-            <IconButton edge="end" aria-label="delete">
-              <DeleteIcon />
-            </IconButton>
-          </ListItemSecondaryAction>
-        </ListItem>
-        <ListItem
-          button
-          selected={selectedIndex === 1}
-          onClick={(event) => handleListItemClick(event, 1)}
-        >
-          <ListItemText primary="Boiler" />
-          <ListItemSecondaryAction onClick={() => console.log("test")}>
-            <IconButton edge="end" aria-label="delete">
-              <DeleteIcon />
-            </IconButton>
-          </ListItemSecondaryAction>
-        </ListItem>
+        {props.searchNames.map((name, index) => {
+          return (
+            <ListItem
+              button
+              key={index}
+              selected={props.selectedIndex === index}
+              onClick={(event) => props.handleListItemClick( index, name)}
+            >
+              <ListItemText primary={name} />
+              <ListItemSecondaryAction onClick={() => console.log("delete")}>
+                <IconButton edge="end" aria-label="delete">
+                  <DeleteIcon />
+                </IconButton>
+              </ListItemSecondaryAction>
+            </ListItem>
+          )
+        })}
       </List>
     </div >
   );
