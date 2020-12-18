@@ -46,14 +46,16 @@ export default function SelectedListItem(props) {
               button
               key={index}
               selected={props.selectedIndex === index}
-              onClick={(event) => props.handleListItemClick( index, name)}
+              onClick={(event) => props.handleListItemClick(index, name)}
             >
               <ListItemText primary={name} />
-              <ListItemSecondaryAction onClick={() => console.log("delete")}>
-                <IconButton edge="end" aria-label="delete">
-                  <DeleteIcon />
-                </IconButton>
-              </ListItemSecondaryAction>
+              {(name === 'Camera' || name === 'Boiler') ?
+                null :
+                <ListItemSecondaryAction onClick={() => props.handleListItemRemove(name)}>
+                  <IconButton edge="end" aria-label="delete">
+                    <DeleteIcon />
+                  </IconButton>
+                </ListItemSecondaryAction>}
             </ListItem>
           )
         })}
