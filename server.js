@@ -44,9 +44,10 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-app.use(cors)
 // Define API routes here
 app.use(routes);
+
+app.use(cors)
 
 const botName = "ChatCord Bot"; // Server name
 // SOCKET.IO - Run when client connects
