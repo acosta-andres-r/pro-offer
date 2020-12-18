@@ -38,13 +38,9 @@ const buy = () => {
     })
     if (nameFound === -1) {
       setSearchNames([...savedNames, id]);
-      setSelectedIndex(savedNames.length);
-      filterProducts(allProducts, id);
       handleListItemClick(savedNames.length, id);
     } else {
       setSearchNames([...savedNames]);
-      setSelectedIndex(nameFound);
-      filterProducts(allProducts, id);
       handleListItemClick(nameFound, id);
     }
   }, [allProducts])
@@ -54,6 +50,7 @@ const buy = () => {
       localStorage.setItem('history', JSON.stringify(searchNames))
     }
   })
+
   const filterProducts = (array, search) => {
     const searchedProducts = array.filter((product) => {
       if (product.description) {
@@ -69,7 +66,14 @@ const buy = () => {
     filterProducts(allProducts, name);
   };
 
+  const handleListItemRemove = (name) => {
+    const namesArray = [...searchNames];
+    namesArray.splice(namesArray.indexOf(name), 1);
+    setSearchNames(namesArray);
+  };
+
   const diplayProductInfoHandler = (event) => {
+    // This has to redirect to /product/:id
     console.log(`show product ${event.target.getAttribute('data-id')}`);
   };
 
@@ -78,7 +82,8 @@ const buy = () => {
       <List
         selectedIndex={selectedIndex}
         searchNames={searchNames}
-        handleListItemClick={handleListItemClick} />
+        handleListItemClick={handleListItemClick} 
+        handleListItemRemove={handleListItemRemove}/>
       <Cards productData={filteredProducts} clicked={diplayProductInfoHandler} />
     </div>
   )
