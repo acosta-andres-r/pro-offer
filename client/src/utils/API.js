@@ -24,11 +24,11 @@ const api = {
 
   // UPLOAD to cloudinary
   uploadImage: function (formData) {
-    return axios.post("/api/cloudinary/", formData)
+    return axios.post("../api/cloudinary/", formData)
   },
   // DELETE from cloudinary
   deleteImage: function (publicID) {
-    return axios.delete("api/cloudinary/", {
+    return axios.delete("../api/cloudinary/", {
       data: {
         publicID: publicID
       }
