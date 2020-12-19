@@ -31,8 +31,8 @@ app.use(express.json());
 const storage = multer.diskStorage({
   destination: path.join(__dirname, "client/public/img/uploads"),
   filename: (req, file, cb, filename) => {
-    console.log("in multer");
-    console.log(file);
+    // console.log("in multer");
+    // console.log(file);
     cb(null, uuid() + path.extname(file.originalname));
   }
 })
@@ -80,7 +80,7 @@ io.on("connection", (socket) => {
       room: userJoined.room,
       users: getRoomUsers(userJoined.room)
     });
-    
+
     // Send rooms info
     io.to(userJoined.room).emit("roomsInfo", {
       rooms: getRoomNames()
