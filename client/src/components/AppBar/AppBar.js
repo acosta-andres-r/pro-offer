@@ -18,6 +18,28 @@ import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 
+const sellMenu = [
+  {
+    name: 'My products',
+    route: '/sell'
+  },
+  {
+    name: 'Add product',
+    route: '/sell/add'
+  }
+]
+
+const profileMenu = [
+  {
+    name: 'Profile',
+    route: '/'
+  },
+  {
+    name: 'My account',
+    route: '/'
+  }
+]
+
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -64,8 +86,11 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create('width'),
     width: '100%',
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up('lg')]: {
       width: '65ch',
+    },
+    [theme.breakpoints.only('md')]: {
+      width: '50ch',
     },
     [theme.breakpoints.only('sm')]: {
       width: '35ch',
@@ -93,8 +118,11 @@ export default function PrimarySearchAppBar() {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const handleProfileMenuOpen = (event) => {
+  const [menuItems, setMenuItems] = React.useState([]);
+
+  const handleMenuOpen = (event, items) => {
     setAnchorEl(event.currentTarget);
+    setMenuItems([...items]);
   };
 
   const handleMobileMenuClose = () => {
@@ -104,6 +132,7 @@ export default function PrimarySearchAppBar() {
   const handleMenuClose = () => {
     setAnchorEl(null);
     handleMobileMenuClose();
+    setMenuItems([]);
   };
 
   const handleMobileMenuOpen = (event) => {
@@ -111,14 +140,21 @@ export default function PrimarySearchAppBar() {
   };
 
   // Additional Functions
+
+  const handleMenuItemClose = (route) => {
+    handleRedirect(route);
+    handleMenuClose();
+  }
+
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
-      const pathName = "/search/" + event.target.value
-      console.log(pathName)
-      window.location.pathname = pathName
+      handleRedirect("/search/" + event.target.value)
     }
   }
 
+  const handleRedirect = (pathName) => {
+    window.location.pathname = pathName;
+  };
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -131,8 +167,13 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      {menuItems.map(item => {
+        return (
+          <MenuItem onClick={() => handleMenuItemClose(item.route)}>{item.name}</MenuItem>
+        )
+      })}
+      {/* <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleMenuClose}>My account</MenuItem> */}
     </Menu>
   );
 
@@ -147,8 +188,13 @@ export default function PrimarySearchAppBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton aria-label="show 0 new notifications" color="inherit">
+      <MenuItem onClick={(event) => { handleMenuOpen(event, sellMenu) }}>
+        <IconButton
+          aria-label="show 0 new notifications"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
           <Badge badgeContent={0} color="secondary">
             <AddAPhotoIcon />
           </Badge>
@@ -163,7 +209,7 @@ export default function PrimarySearchAppBar() {
         </IconButton>
         <p>Offers</p>
       </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
+      <MenuItem onClick={(event) => { handleMenuOpen(event, profileMenu) }}>
         <IconButton
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
@@ -189,11 +235,11 @@ export default function PrimarySearchAppBar() {
           >
             <MenuIcon />
           </IconButton> */}
-          <Link to="/" style={{ textDecoration: 'none', color: 'inherit', }}>
+          <MenuItem onClick={() => { handleRedirect("/") }}>
             <Typography className={classes.title} variant="h6" >
               Pro-Offer
           </Typography>
-          </Link>
+          </MenuItem>
           <div className={classes.grow} />
           <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -212,22 +258,39 @@ export default function PrimarySearchAppBar() {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show 0 new notifications" color="inherit">
-              <Badge badgeContent={0} color="secondary">
-                <AddAPhotoIcon />
-              </Badge>
-            </IconButton>
-            <IconButton aria-label="show 0 new mails" color="inherit">
-              <Badge badgeContent={0} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton>
+            <MenuItem
+              aria-label="show more"
+              aria-controls={menuId}
+              aria-haspopup="true"
+              onClick={(event) => handleMenuOpen(event, sellMenu)}
+            >
+              <IconButton
+                aria-label="show 0 new notifications"
+                color="inherit"
+              >
+                <Badge badgeContent={0} color="secondary">
+                  <AddAPhotoIcon />
+                </Badge>
+              </IconButton>
+              <p>Sell</p>
+            </MenuItem>
+            <MenuItem
+              onClick={() => { handleRedirect("/offers") }}
+            >
+              <IconButton aria-label="show 0 new mails" color="inherit">
+                <Badge badgeContent={0} color="secondary">
+                  <MailIcon />
+                </Badge>
+              </IconButton>
+              <p>Offers</p>
+            </MenuItem>
             <IconButton
               edge="end"
               aria-label="account of current user"
               aria-controls={menuId}
               aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
+              // onClick={handleMenuOpen}
+              onClick={(event) => { handleMenuOpen(event, profileMenu) }}
               color="inherit"
             >
               <AccountCircle />
@@ -238,7 +301,7 @@ export default function PrimarySearchAppBar() {
               aria-label="show more"
               aria-controls={mobileMenuId}
               aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
+              onClick={(event) => handleMobileMenuOpen(event,)}
               color="inherit"
             >
               <MoreIcon />
