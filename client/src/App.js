@@ -6,6 +6,9 @@ import Chat from "./container/Chat";
 import Admin from "./container/Admin"
 import Buy from "./pages/Buy"
 import Search from "./pages/Search"
+import Add from "./pages/Add"
+
+import Alert from './components/SnackBar/SnackBar'
 
 import AppBar from './components/AppBar/AppBar'
 
@@ -19,14 +22,19 @@ function App() {
           <Route exact path={"/"}>
             <Buy />
           </Route>
-          <Route exact path={"/sell"}>
-            {/* <Sell /> */}
-          </Route>
-          <Route exact path={"/offers"}>
-            {/* <Sell /> */}
-          </Route>
           <Route exact path={"/search/:id"}>
             <Search />
+          </Route>
+          <Route exact path={"/sell"}>
+            {/* <Sell /> */}
+            <ProductDB />
+          </Route>
+          <Route exact path={"/sell/add"}>
+            {/* <Sell /> */}
+            <Add />
+          </Route>
+          <Route exact path={"/offers"}>
+            <Alert />
           </Route>
           {/* <Route>
       <NoMatch />
