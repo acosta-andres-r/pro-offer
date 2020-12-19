@@ -15,11 +15,21 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
     maxWidth: 320,
-    backgroundColor: '#CFD4C7',
+    backgroundColor: '#FBFFF2',
+    border: '1px solid #888888',
+    // boxShadow: '2px 4px 2px 2px #888888',
 
     display: 'none',
     [theme.breakpoints.up('sm')]: {
       display: 'block',
+    },
+    [theme.breakpoints.only('sm')]: {
+      // display: 'block',
+      maxWidth: 200,
+    },
+    [theme.breakpoints.only('md')]: {
+      // display: 'block',
+      maxWidth: 250,
     },
   },
   title: {
