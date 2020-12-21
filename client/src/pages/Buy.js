@@ -20,11 +20,14 @@ const buy = () => {
   }, [])
 
   const diplayProductInfoHandler = (event) => {
-    console.log(`show product ${event.target.getAttribute('data-id')}`);
+    window.location.pathname = "/product/" + event.target.getAttribute('data-id');
   };
 
   return (
-    <Cards productData={products} clicked={diplayProductInfoHandler} />
+    <Cards
+      productData={products}
+      clicked={diplayProductInfoHandler}
+    />
   )
 };
 
