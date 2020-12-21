@@ -75,7 +75,7 @@ const add = () => {
 
     API.uploadImage(formData)
       .then(res => {
-        console.log(res);
+        // console.log(res);
         setPublic_id(res.data.public_id);
         setImageURL(res.data.url)
       })
@@ -90,7 +90,7 @@ const add = () => {
     if (!public_id) return
     API.deleteImage(public_id)
       .then(res => {
-        console.log(res)
+        // console.log(res)
         setPublic_id('');
         setImageURL(placeHolderUpload)
       })
@@ -98,7 +98,7 @@ const add = () => {
   }
 
   const handleOnChangeInput = event => {
-    console.log(event.target.getAttribute('id'));
+    // console.log(event.target.getAttribute('id'));
     const idEl = event.target.getAttribute('id');
     const value = event.target.value;
     switch (idEl) {
@@ -143,10 +143,10 @@ const add = () => {
       public_id: public_id
     }
 
-    console.log('Entered in createProducHandler');
+    // console.log('Entered in createProducHandler');
     API.saveProduct(productInfo)
       .then(res => {
-        console.log(res)
+        // console.log(res)
         handleClearInputs();
         handleClick();
       })
@@ -208,7 +208,7 @@ const add = () => {
       </div>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
-          This is a success message!
+          Success!
         </Alert>
       </Snackbar>
     </div>
