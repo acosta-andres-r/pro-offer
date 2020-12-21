@@ -167,13 +167,11 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      {menuItems.map(item => {
+      {menuItems.map((item, index) => {
         return (
-          <MenuItem onClick={() => handleMenuItemClose(item.route)}>{item.name}</MenuItem>
+          <MenuItem key={index} onClick={() => handleMenuItemClose(item.route)}>{item.name}</MenuItem>
         )
       })}
-      {/* <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem> */}
     </Menu>
   );
 
@@ -201,7 +199,9 @@ export default function PrimarySearchAppBar() {
         </IconButton>
         <p>Sell</p>
       </MenuItem>
-      <MenuItem>
+      <MenuItem
+        onClick={() => { handleRedirect("/offers") }}
+      >
         <IconButton aria-label="show 0 new mails" color="inherit">
           <Badge badgeContent={0} color="secondary">
             <MailIcon />
