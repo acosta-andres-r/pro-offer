@@ -7,6 +7,9 @@ import Admin from "./container/Admin"
 import Buy from "./pages/Buy"
 import Search from "./pages/Search"
 import Add from "./pages/Add"
+import View from "./pages/View"
+import Manage from "./pages/Manage"
+import Edit from "./pages/Edit"
 
 import Alert from './components/SnackBar/SnackBar'
 
@@ -26,12 +29,16 @@ function App() {
             <Search />
           </Route>
           <Route exact path={"/sell"}>
-            {/* <Sell /> */}
-            <ProductDB />
+            <Manage />
           </Route>
           <Route exact path={"/sell/add"}>
-            {/* <Sell /> */}
             <Add />
+          </Route>
+          <Route exact path={"/edit/:id"}>
+            <Edit />
+          </Route>
+          <Route exact path={"/product/:id"}>
+            <View />
           </Route>
           <Route exact path={"/offers"}>
             <Alert />
