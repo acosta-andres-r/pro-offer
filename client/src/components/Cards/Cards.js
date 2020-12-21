@@ -19,7 +19,11 @@ const cards = (props) => {
     <div style={classes}>
       {props.productData.map((product, index) => {
         return (
-          <ProductCard key={index} {...product} clicked={props.clicked} />
+          <ProductCard 
+          key={index} 
+          {...product} 
+          clicked={props.clicked} 
+          />
         )
       })}
     </div>
