@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const add = () => {
+const manage = () => {
   const classes = useStyles();
 
   const [rows, setRows] = useState([]);
@@ -49,6 +49,12 @@ const add = () => {
       .then(res => {
         console.log(res)
         setDeletedProduct(res.data._id)
+        
+        if (res.data.public_id) {
+          API.deleteImage(res.data.public_id)
+            .then(res => console.log(res))
+            .catch(err => console.log(err));
+        }
       })
       .catch(err => console.log(err));
   }
@@ -80,4 +86,4 @@ const add = () => {
   )
 };
 
-export default add;
+export default manage;
