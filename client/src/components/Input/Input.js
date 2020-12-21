@@ -48,7 +48,7 @@ export default function LayoutTextFields(props) {
         helperText="*Required"
         variant="outlined"
         onChange={props.handleOnChangeInput}
-        value={props.title}
+        value={props.title || ''}
         error={props.isError}
       />
       <TextField
@@ -61,7 +61,7 @@ export default function LayoutTextFields(props) {
         variant="outlined"
         style={{ marginBottom: "30px" }}
         onChange={props.handleOnChangeInput}
-        value={props.description}
+        value={props.description || ''}
       />
       <div className={classes.textField} style={
         {
@@ -82,7 +82,7 @@ export default function LayoutTextFields(props) {
           style={{ width: "55%" }}
           variant="outlined"
           onChange={props.handleOnChangeInput}
-          value={props.city}
+          value={props.city || ''}
         />
         <TextField
           id="state"
@@ -91,7 +91,7 @@ export default function LayoutTextFields(props) {
           className={classes.locationField}
           variant="outlined"
           onChange={props.handleOnChangeInput}
-          value={props.state}
+          value={props.state || ''}
         />
         <TextField
           id="zipcode"
@@ -100,7 +100,7 @@ export default function LayoutTextFields(props) {
           className={classes.locationField}
           variant="outlined"
           onChange={props.handleOnChangeInput}
-          value={props.zipcode}
+          value={props.zipcode || ''}
         />
       </div>
       <TextField
@@ -114,7 +114,7 @@ export default function LayoutTextFields(props) {
         style={{ width: "45%", marginLeft: 'auto', marginRight: 'auto', marginBottom: "30px" }}
         variant="filled"
         onChange={props.handleOnChangeInput}
-        value={props.price}
+        value={props.price || ''}
       />
       <Button
         variant="contained"
