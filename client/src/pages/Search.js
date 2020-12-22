@@ -74,7 +74,8 @@ const buy = () => {
 
   const diplayProductInfoHandler = (event) => {
     // This has to redirect to /product/:id
-    console.log(`show product ${event.target.getAttribute('data-id')}`);
+    // console.log(`show product ${event.target.getAttribute('data-id')}`);
+    window.location.pathname = "/product/" + event.target.getAttribute('data-id');
   };
 
   return (
