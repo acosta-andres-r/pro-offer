@@ -4,7 +4,7 @@ import io from 'socket.io-client';
 import Chat from '../components/Chat/Chat'
 
 let socket
-const ENDPOINT = 'http://localhost:3001'//'https://project-chat-application.herokuapp.com/'
+const ENDPOINT = (window.location.href === 'http://localhost:3001') ? 'http://localhost:3001' : 'https://pro-offer.herokuapp.com/'
 
 const chatWidget = () => {
 
