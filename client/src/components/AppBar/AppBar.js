@@ -17,6 +17,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import ForumIcon from '@material-ui/icons/Forum';
 
 const sellMenu = [
   {
@@ -200,14 +201,14 @@ export default function PrimarySearchAppBar() {
         <p>Sell</p>
       </MenuItem>
       <MenuItem
-        onClick={() => { handleRedirect("/offers") }}
+        onClick={() => { handleRedirect("/admin") }}
       >
         <IconButton aria-label="show 0 new mails" color="inherit">
           <Badge badgeContent={0} color="secondary">
-            <MailIcon />
+            <ForumIcon />
           </Badge>
         </IconButton>
-        <p>Offers</p>
+        <p>Admin</p>
       </MenuItem>
       <MenuItem onClick={(event) => { handleMenuOpen(event, profileMenu) }}>
         <IconButton
@@ -275,14 +276,14 @@ export default function PrimarySearchAppBar() {
               <p>Sell</p>
             </MenuItem>
             <MenuItem
-              onClick={() => { handleRedirect("/offers") }}
+              onClick={() => { handleRedirect("/admin") }}
             >
               <IconButton aria-label="show 0 new mails" color="inherit">
                 <Badge badgeContent={0} color="secondary">
-                  <MailIcon />
+                  <ForumIcon />
                 </Badge>
               </IconButton>
-              <p>Offers</p>
+              <p>Admin</p>
             </MenuItem>
             <IconButton
               edge="end"

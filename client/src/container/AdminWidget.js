@@ -33,7 +33,7 @@ const adminWidget = () => {
     useEffect(() => {
         // Message from Server
         socket.on('message', message => {
-            console.log(message);
+            // console.log(message);
             // outputMessage(message);
             setMessages(messages => [...messages, message]); // Taking previous messages variable
         })
@@ -51,7 +51,7 @@ const adminWidget = () => {
 
         // GET rooms
         socket.on('roomsInfo', ({ rooms }) => {
-            console.log('in rooms info');
+            // console.log('in rooms info');
             setRooms([...rooms])
         })
     }, [])

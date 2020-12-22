@@ -41,9 +41,9 @@ function App() {
           <Route exact path={"/product/:id"}>
             <View />
           </Route>
-          <Route exact path={"/offers"}>
+          {/* <Route exact path={"/offers"}>
             <ChatWidget />
-          </Route>
+          </Route> */}
           <Route exact path={"/admin"}>
             <AdminWidget />
           </Route>
