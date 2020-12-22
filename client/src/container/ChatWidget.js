@@ -4,12 +4,13 @@ import io from 'socket.io-client';
 import Chat from '../components/Chat/Chat'
 
 let socket
-const ENDPOINT = (window.location.href === 'http://localhost:3001') ? 'http://localhost:3001' : 'https://pro-offer.herokuapp.com/'
+// const ENDPOINT = (window.location.href === 'http://localhost:3000') ? 'http://localhost:3001' : 'https://pro-offer.herokuapp.com/'
+const ENDPOINT = window.location.protocol + '//' + window.location.host
 
 const chatWidget = () => {
 
-  const [user, setUser] = useState(localStorage.getItem('user') || '');
-  const [room, setRoom] = useState(localStorage.getItem('room') || '');
+  const [user, setUser] = useState('NEW USER');
+  const [room, setRoom] = useState('CHATROOM');
 
   const [message, setMessage] = useState('')
   const [messages, setMessages] = useState(JSON.parse(localStorage.getItem('messages')))
@@ -24,8 +25,8 @@ const chatWidget = () => {
       }
     })
 
-    return () =>{ 
-        localStorage.removeItem('messages')
+    return () => {
+      localStorage.removeItem('messages')
     }
 
   }, [ENDPOINT])
@@ -75,12 +76,12 @@ const chatWidget = () => {
   }
 
   return (
-      <Chat 
-      message={message} 
+    <Chat
+      message={message}
       setMessage={setMessage}
       sendMessageHandler={sendMessageHandler}
       messages={messages}
-      />
+    />
   );
 }
 

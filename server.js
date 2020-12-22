@@ -57,7 +57,8 @@ io.on("connection", (socket) => {
   io.emit('creation', {
     // user: socket.id + '-USER',
     user: 'NEW USER',
-    room: Array.from(socket.rooms)[0]
+    // room: Array.from(socket.rooms)[0]
+    room: 'CHATROOM'
   })
 
   // Join Room
