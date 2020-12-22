@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import { createMuiTheme, responsiveFontSizes, ThemeProvider } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import io from 'socket.io-client';
 import Chat from '../components/Chat/Chat'
 
@@ -6,7 +9,39 @@ let socket
 // const ENDPOINT = (window.location.href === 'http://localhost:3000') ? 'http://localhost:3001' : 'https://pro-offer.herokuapp.com/'
 const ENDPOINT = window.location.protocol + '//' + window.location.host
 
+let theme = createMuiTheme();
+theme = responsiveFontSizes(theme);
+
+const useStyles = makeStyles((theme) => ({
+
+    root: {
+      margin: '16px 15px 10px 15px',
+      flexGrow: 2,
+  
+      display: 'flex',
+    //   flexDirection: 'column',
+      // alignItems: 'center',
+      justifyContent: 'center',
+    //   alignContent: 'center',
+  
+      [theme.breakpoints.down('sm')]: {
+        // margin: '16px auto 10px auto',
+      }
+    },
+    title: {
+        marginTop: '30px',
+        marginLeft: '45px',
+        marginBottom: '10px',
+        color: "rgba(0, 0, 0, 0.67)",
+    
+        [theme.breakpoints.down('xs')]: {
+          margin: '0 auto 10px auto',
+        }
+      },
+  }));
+
 const adminWidget = () => {
+    const classes = useStyles();
 
     //   const [user, setUser] = useState('');
     const user = 'admin'
@@ -67,12 +102,20 @@ const adminWidget = () => {
     }
 
     return (
+        <div className={classes.root}>
+      <ThemeProvider theme={theme} >
+        <Typography
+          variant="h3"
+          className={classes.title}
+        >Admin Chat</Typography>
+      </ThemeProvider>
         <Chat
             message={message}
             setMessage={setMessage}
             sendMessageHandler={sendMessageHandler}
             messages={messages}
         />
+        </div>
     );
 }
 
