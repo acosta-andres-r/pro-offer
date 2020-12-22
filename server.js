@@ -55,7 +55,8 @@ io.on("connection", (socket) => {
 
   // Create user and room for chat
   io.emit('creation', {
-    user: socket.id + '-USER',
+    // user: socket.id + '-USER',
+    user: 'NEW USER',
     room: Array.from(socket.rooms)[0]
   })
 
@@ -63,12 +64,12 @@ io.on("connection", (socket) => {
   socket.on("joinRoom", ({ user, room }) => {
 
     const userJoined = userJoin(socket.id, user, room);
-    console.log('user id', socket.id);
-    console.log('rooms', socket.rooms);
+    // console.log('user id', socket.id);
+    // console.log('rooms', socket.rooms);
     socket.join(userJoined.room);
 
     // Welcome current user
-    socket.emit("message", formatMessage(botName, "Welcome to ChatCord!"));
+    socket.emit("message", formatMessage(botName, "Welcome to Pro-Offer!"));
 
     // Bradcast when a user connects
     socket.broadcast

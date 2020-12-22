@@ -6,10 +6,10 @@ import Chat from '../components/Chat/Chat'
 let socket
 const ENDPOINT = 'http://localhost:3001'//'https://project-chat-application.herokuapp.com/'
 
-const chat = () => {
+const chatWidget = () => {
 
-  const [user, setUser] = useState(localStorage.getItem('user'));
-  const [room, setRoom] = useState(localStorage.getItem('room'));
+  const [user, setUser] = useState(localStorage.getItem('user') || '');
+  const [room, setRoom] = useState(localStorage.getItem('room') || '');
 
   const [message, setMessage] = useState('')
   const [messages, setMessages] = useState(JSON.parse(localStorage.getItem('messages')))
@@ -23,6 +23,10 @@ const chat = () => {
         'my-custom-header': 'abcd'
       }
     })
+
+    return () =>{ 
+        localStorage.removeItem('messages')
+    }
 
   }, [ENDPOINT])
 
@@ -49,7 +53,7 @@ const chat = () => {
             && messages[0].text === message.text) ?
             [...messages] : [...messages, message] : [message]
 
-        localStorage.setItem('messages', JSON.stringify(newMessages))
+        // localStorage.setItem('messages', JSON.stringify(newMessages))
         return newMessages;
       }); // Taking previous messages variable
     })
@@ -71,40 +75,13 @@ const chat = () => {
   }
 
   return (
-    <div>
-      <Chat />
-      
-      <form>
-        <input
-          value={message}
-          placeholder='Send a message...'
-          onChange={(event) => setMessage(event.target.value)}
-        />
-        <button
-          onClick={((event) => sendMessageHandler(event))}
-        >Send</button>
-      </form>
-      
-      <input
-        placeholder='Save in localstorage...'
-        onChange={(event) => localStorage.setItem('user', event.target.value)}
+      <Chat 
+      message={message} 
+      setMessage={setMessage}
+      sendMessageHandler={sendMessageHandler}
+      messages={messages}
       />
-      <button
-        onClick={((event) => sendMessageHandler(event))}
-      >Save</button>
-      <button
-        onClick={() => localStorage.setItem('messages', JSON.stringify(messages))}
-      >Show Msg</button>
-      <div style={{ height: "200px" }}>
-        {messages ?
-          messages.map((message, index) => {
-            return (
-              <p key={index}><strong>{message.username}:</strong> {message.text} @ {message.time}</p>
-            )
-          }) : null}
-      </div>
-    </div>
   );
 }
 
-export default chat;
+export default chatWidget;

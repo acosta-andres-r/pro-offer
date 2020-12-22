@@ -46,15 +46,15 @@ const buy = () => {
   }, [allProducts])
 
   useEffect(() => {
-    return () => {
       localStorage.setItem('history', JSON.stringify(searchNames))
-    }
-  })
+  }, [searchNames])
 
   const filterProducts = (array, search) => {
     const searchedProducts = array.filter((product) => {
       if (product.description) {
-        return product.description.toLowerCase().includes(search.toLowerCase())
+        if (product.description.toLowerCase().includes(search.toLowerCase())) {
+          return true
+        }
       }
       return product.title.toLowerCase().includes(search.toLowerCase())
     })

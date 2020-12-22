@@ -6,6 +6,7 @@ import { createMuiTheme, responsiveFontSizes, ThemeProvider } from '@material-ui
 import Grid from '@material-ui/core/Grid';
 import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
+import ChatWidget from '../container/ChatWidget';
 
 let theme = createMuiTheme();
 theme = responsiveFontSizes(theme);
@@ -142,6 +143,7 @@ const view = () => {
         </Grid>
         {/* </Paper> */}
       </div>
+      <ChatWidget />
     </div>
   );
 }

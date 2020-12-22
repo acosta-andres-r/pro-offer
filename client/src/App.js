@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import ProductDB from "./container/ProductDB";
-import Chat from "./container/Chat";
 import Admin from "./container/Admin"
 import Buy from "./pages/Buy"
 import Search from "./pages/Search"
@@ -10,6 +9,8 @@ import Add from "./pages/Add"
 import View from "./pages/View"
 import Manage from "./pages/Manage"
 import Edit from "./pages/Edit"
+import ChatWidget from "./container/ChatWidget"
+import AdminWidget from "./container/AdminWidget"
 
 import Alert from './components/SnackBar/SnackBar'
 
@@ -41,7 +42,10 @@ function App() {
             <View />
           </Route>
           <Route exact path={"/offers"}>
-            <Alert />
+            <ChatWidget />
+          </Route>
+          <Route exact path={"/admin"}>
+            <AdminWidget />
           </Route>
           {/* <Route>
       <NoMatch />
