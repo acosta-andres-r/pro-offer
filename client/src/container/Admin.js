@@ -3,7 +3,8 @@ import io from 'socket.io-client';
 
 let socket
 // const ENDPOINT = 'http://localhost:3001'//'https://project-chat-application.herokuapp.com/'
-const ENDPOINT = window.location.href
+const ENDPOINT = (window.location.href === 'http://localhost:3001') ? 'http://localhost:3001' : 'https://pro-offer.herokuapp.com/'
+console.log(window.location.href);
 
 const chat = () => {
 
