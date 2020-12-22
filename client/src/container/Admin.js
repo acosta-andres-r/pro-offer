@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 
 let socket
-const ENDPOINT = 'http://localhost:3001'//'https://project-chat-application.herokuapp.com/'
+// const ENDPOINT = 'http://localhost:3001'//'https://project-chat-application.herokuapp.com/'
+const ENDPOINT = window.location.href
 
 const chat = () => {
 
